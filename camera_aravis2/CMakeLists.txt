@@ -95,7 +95,9 @@ add_library(${LIBRARY_NAME} SHARED
 )
 target_link_libraries(${LIBRARY_NAME} ${LIBRARIES})
 target_compile_definitions(${LIBRARY_NAME} PRIVATE ${COMMON_COMPILE_DEFINITIONS})
-ament_target_dependencies(${LIBRARY_NAME} ${DEPENDENCIES})
+foreach(dep ${DEPENDENCIES})
+  target_link_libraries(${LIBRARY_NAME} ${${dep}_TARGETS})
+endforeach()
 
 # camera_driver_gv node
 
